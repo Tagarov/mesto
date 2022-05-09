@@ -1,0 +1,12 @@
+.header__line {
+  margin-top: 40px;
+  width: 880px;
+  height: 1px;
+  background-color: #545454;
+}
+
+@media screen and (max-width: 880px) {
+  .header__line {
+    width: 100%;
+  }
+}
