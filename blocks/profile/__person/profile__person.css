@@ -1,4 +1,5 @@
 .profile__person {
+  max-width: 300px;
   margin: 0;
   display: inline;
   font-family: "Inter", Arial, Helvetica, sans-serif;
@@ -7,6 +8,9 @@
   font-size: 42px;
   line-height: 1.14;
   color: #ffffff;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 @media screen and (max-width: 640px) {

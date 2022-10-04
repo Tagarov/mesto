@@ -1,11 +1,11 @@
 .elements {
     display: grid;
-    max-width: 880px;
+    width: 100%;
     margin: 51px auto 0;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: repeat(3, 282px);
     grid-row-gap: 20px;
-    justify-items: center;
-    
+    justify-content: space-between;
+    justify-items: center;    
 }
 
 @media screen and (max-width: 880px) {
