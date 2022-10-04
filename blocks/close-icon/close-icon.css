@@ -1,0 +1,9 @@
+.close-icon {
+    position: absolute;
+    top: -40px;
+    right: -40px;
+}
+
+.close-icon:hover {
+    opacity: 0.6;
+}
