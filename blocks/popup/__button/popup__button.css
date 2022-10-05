@@ -18,3 +18,10 @@
     opacity: 0.8;
     cursor: pointer;
 }
+
+@media screen and (max-width: 640px) {
+    .popup__button {
+        width: 238px;
+        margin-top: 45px;
+    }
+}

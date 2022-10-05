@@ -20,7 +20,7 @@
         <div class="profile__profile-info">
           <h1 class="profile__person">Жак-Ив Кусто</h1>
           <button class="profile__edit-button">
-            <img src="./images/edit-button.svg" />
+            <img class="profile__edit-image" src="./images/edit-button.svg" />
           </button>
           <p class="profile__person-description">Исследователь океана</p>
         </div>
@@ -72,22 +72,23 @@
           <img class="elements__element-heart" src="./images/heart.svg" />
         </div>
       </div>
-      <div class="popup">
-        <div class="popup__container">
-          <img class="close-icon" src="./images/Close Icon.svg">          
-          <h2 class="popup__text">Редактировать профиль</h2>
-          <form class="popup__form">
-            <input type="text" class="popup__input popup__input-name">
-            <input type="text" class="popup__input popup__input-desc">
-            <button type="submit" class="popup__button">Сохранить</button>
-          </form>
-        </div>
-      </div>
     </section>
   </main>
   <footer class="footer">
     <p class="footer__copy">&copy; 2020 Mesto Russia</p>
   </footer>
+
+  <div class="popup">
+    <div class="popup__container">
+      <img class="close-icon" src="./images/Close Icon.svg">          
+      <h2 class="popup__text">Редактировать профиль</h2>
+      <form class="popup__form">
+        <input type="text" class="popup__input popup__input-name">
+        <input type="text" class="popup__input popup__input-desc">
+        <button type="submit" class="popup__button">Сохранить</button>
+      </form>
+    </div>
+  </div>
   <script src="./pages/script.js"></script>
 </body>
 

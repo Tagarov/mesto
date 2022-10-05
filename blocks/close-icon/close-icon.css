@@ -7,3 +7,11 @@
 .close-icon:hover {
     opacity: 0.6;
 }
+
+@media screen and (max-width: 640px) {
+    .close-icon {
+        width: 20px;
+        top: -36px;
+        right: 0px;
+    }
+}
