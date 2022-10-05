@@ -2,12 +2,12 @@
   margin: 0 0 0 18px;
   padding: 0;
   background-color: #000000;
-  cursor: pointer;  
+  cursor: pointer;
   border: 0;
   transition: opacity 0.3s;
 }
 
-.profile__edit-button:hover{
+.profile__edit-button:hover {
   opacity: 0.6;
 }
 
