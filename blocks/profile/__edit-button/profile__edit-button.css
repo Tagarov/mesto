@@ -4,6 +4,7 @@
   background-color: #000000;
   cursor: pointer;  
   border: 0;
+  transition: opacity 0.3s;
 }
 
 .profile__edit-button:hover{
