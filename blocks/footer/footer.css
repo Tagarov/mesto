@@ -3,10 +3,12 @@
     min-width: 320px;
 }
 
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 678px) {
     .footer {
-        margin: 66px auto 60px;
+        margin: 48px auto 36px;
         font-size: 14px;
         line-height: 17px;
+        min-width: 282px;
+
     }
 }

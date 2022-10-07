@@ -8,16 +8,15 @@
     justify-items: center;    
 }
 
-@media screen and (max-width: 880px) {
+@media screen and (max-width: 918px) {
     .elements{
-        width: 100%;
         grid-template-columns: 1fr 1fr;
     }
 }
 
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 678px) {
     .elements{
-        width: 100%;
+        margin-top: 36px;
         grid-template-columns: 1fr;
     }
 }

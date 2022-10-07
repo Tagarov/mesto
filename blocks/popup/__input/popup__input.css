@@ -5,7 +5,7 @@
     margin: 30px auto;
     box-sizing: border-box;
     border-width: 0 0 1px;
-    /* padding: 12px 0px 12px 12px;  */
+    border-color: rgba(0, 0, 0, 0.2);
     padding: 0px 0px 12px;
     font-family: "Inter", Arial, Helvetica, sans-serif;
     font-style: normal;
@@ -15,7 +15,7 @@
     color: #000000;
 }
 
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 678px) {
     .popup__input {
         width: 238px;
         margin-top: 30px;

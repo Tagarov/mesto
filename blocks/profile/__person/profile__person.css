@@ -13,10 +13,10 @@
   overflow: hidden;
 }
 
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 678px) {
   .profile__person {
     display: block;
-    max-width: 246px;
+    max-width: 208px;
     margin: 0 auto;
     font-size: 27px;
     line-height: 33px;

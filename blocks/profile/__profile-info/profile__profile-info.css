@@ -4,7 +4,7 @@
     min-width: 282px;
 }
 
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 678px) {
     .profile__profile-info{
         max-width: 282px;
         margin-left: 0;
