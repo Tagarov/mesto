@@ -7,8 +7,8 @@ const profileDesc = document.querySelector('.profile__person-description');
 // Находим форму в DOM
 let formElement = document.querySelector('.popup__form');// Воспользуйтесь методом querySelector()
 // Находим поля формы в DOM
-let nameInput = formElement.querySelector('.popup__input_name');// Воспользуйтесь инструментом .querySelector()
-let jobInput = formElement.querySelector('.popup__input_desc');// Воспользуйтесь инструментом .querySelector()
+let nameInput = formElement.querySelector('.popup__input_field_name');// Воспользуйтесь инструментом .querySelector()
+let jobInput = formElement.querySelector('.popup__input_field_desc');// Воспользуйтесь инструментом .querySelector()
 
 
 
