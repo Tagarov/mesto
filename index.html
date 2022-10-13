@@ -20,14 +20,12 @@
           <div class="profile__person-container">
             <h1 class="profile__person">Жак-Ив Кусто</h1>
             <button type="button" class="profile__edit-button">
-              <!-- <img class="profile__edit-image" src="./images/edit-button.svg" alt="Кнопка изменить"/> -->
             </button>
           </div>
           <p class="profile__person-description">Исследователь океана</p>
         </div>
       </div>
       <button type="button" class="profile__add-button">
-        <!-- <img src="./images/plus-sign.svg" class="profile__add-button-image" alt="Плюс"/> -->
       </button>
     </section>
     <section class="elements">
@@ -79,9 +77,9 @@
     <p class="footer__copy">&copy; 2020 Mesto Russia</p>
   </footer>
 
-  <div class="popup">
+  <div class="popup popup_form_edit-profile">
     <div class="popup__container">
-      <button type="button" class="popup__close-button"></button>
+      <button type="button" class="popup__close-button popup__close-button_form_edit-profile"></button>
       <h2 class="popup__text">Редактировать профиль</h2>
       <form name="editProfileInfoForm" class="popup__form">
         <input name="inputName" type="text" class="popup__input popup__input_field_name">
@@ -90,6 +88,19 @@
       </form>
     </div>
   </div>
+
+  <div class="popup popup_form_add-place">
+    <div class="popup__container">
+      <button type="button" class="popup__close-button popup__close-button_form_add-place"></button>
+      <h2 class="popup__text">Новое место</h2>
+      <form name="addNewPlace" class="popup__form">
+        <input name="placeName" type="text" class="popup__input popup__input_place_name" placeholder="Название">
+        <input name="placeLink" type="text" class="popup__input popup__input_place_link" placeholder="Ссылка на картинку">
+        <button type="submit" class="popup__button">Создать</button>
+      </form>
+    </div>
+  </div>
+
   <script src="./scripts/index.js"></script>
 </body>
 
