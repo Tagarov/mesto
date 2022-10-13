@@ -6,6 +6,9 @@ const popupEditProfile = document.querySelector('.popup_form_edit-profile');
 const popupAddPicture = document.querySelector('.popup_form_add-place');
 const profileName = document.querySelector('.profile__person');
 const profileDesc = document.querySelector('.profile__person-description');
+const elementsSection = document.querySelector('.elements');
+const elementTemplate = document.querySelector('#element-template').content;
+
 
 const initialCards = [
    {
@@ -83,3 +86,16 @@ editButton.addEventListener('click', openEditPopup);
 closeButton.addEventListener('click', closePopup);
 closeButton2.addEventListener('click', closePopup);
 addButton.addEventListener('click', openAddPopup);
+
+function addElementToElementsSection(card){
+  const elementNode = elementTemplate.querySelector('.elements__element').cloneNode(true);
+  elementNode.querySelector('.elements__element-image').setAttribute('src',card.link);
+  elementNode.querySelector('.elements__element-image').setAttribute('alt',`Фото ${card.name}`);
+  elementNode.querySelector('.elements__element-name').textContent = card.name;
+  elementsSection.append(elementNode);
+}
+
+function addCards(cardArray){
+  cardArray.forEach(card => addElementToElementsSection(card))
+}
+addCards(initialCards);
