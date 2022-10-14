@@ -3,7 +3,7 @@ const closeButton = document.querySelector(
   ".popup__close-button_form_edit-profile"
 );
 const addButton = document.querySelector(".profile__add-button");
-const closeButton2 = document.querySelector(
+const closeButtonAddForm = document.querySelector(
   ".popup__close-button_form_add-place"
 );
 const popupEditProfile = document.querySelector(".popup_form_edit-profile");
@@ -12,6 +12,8 @@ const profileName = document.querySelector(".profile__person");
 const profileDesc = document.querySelector(".profile__person-description");
 const elementsSection = document.querySelector(".elements");
 const elementTemplate = document.querySelector("#element-template").content;
+const cardPopup = document.querySelector("#popupCard");
+
 
 const initialCards = [
   {
@@ -40,38 +42,30 @@ const initialCards = [
   },
 ];
 
-// Находим форму в DOM
-let formElement = popupEditProfile.querySelector(".popup__form"); // Воспользуйтесь методом querySelector()
-// Находим поля формы в DOM
-let nameInput = formElement.querySelector(".popup__input_field_name"); // Воспользуйтесь инструментом .querySelector()
-let jobInput = formElement.querySelector(".popup__input_field_desc"); // Воспользуйтесь инструментом .querySelector()
 
-// Обработчик «отправки» формы, хотя пока
-// она никуда отправляться не будет
+let formElement = popupEditProfile.querySelector(".popup__form"); 
+
+let nameInput = formElement.querySelector(".popup__input_field_name"); 
+let jobInput = formElement.querySelector(".popup__input_field_desc"); 
+
 function formSubmitHandler(evt) {
-  evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
-  // Так мы можем определить свою логику отправки.
-  // О том, как это делать, расскажем позже.
-  
+  evt.preventDefault(); 
+
   profileName.textContent = nameInput.value;
   profileDesc.textContent = jobInput.value;
   closePopup(evt);
 }
 
-// Прикрепляем обработчик к форме:
-// он будет следить за событием “submit” - «отправка»
 formElement.addEventListener("submit", formSubmitHandler);
 
-// Находим форму в DOM
-let formAddElement = popupAddCard.querySelector(".popup__form"); // Воспользуйтесь методом querySelector()
-// Находим поля формы в DOM
-let nameCardInput = formAddElement.querySelector(".popup__input_place_name"); // Воспользуйтесь инструментом .querySelector()
-let linkCardInput = formAddElement.querySelector(".popup__input_place_link"); // Воспользуйтесь инструментом .querySelector()
+
+let formAddElement = popupAddCard.querySelector(".popup__form"); 
+
+let nameCardInput = formAddElement.querySelector(".popup__input_place_name"); 
+let linkCardInput = formAddElement.querySelector(".popup__input_place_link"); 
 
 function formAddSubmitHandler(evt) {
-  evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
-  // Так мы можем определить свою логику отправки.
-  // О том, как это делать, расскажем позже.
+  evt.preventDefault(); 
 
   const card = {};
   card.name = nameCardInput.value;
@@ -79,10 +73,11 @@ function formAddSubmitHandler(evt) {
   const elementNode = createCardElement(card);
   elementsSection.prepend(elementNode);
   closePopup(evt);
+  nameCardInput.value = "";
+  linkCardInput.value = "";
 }
 
-// Прикрепляем обработчик к форме:
-// он будет следить за событием “submit” - «отправка»
+
 formAddElement.addEventListener("submit", formAddSubmitHandler);
 
 function openEditPopup() {
@@ -106,8 +101,9 @@ function closePopup(evt) {
 
 editButton.addEventListener("click", openEditPopup);
 closeButton.addEventListener("click", closePopup);
-closeButton2.addEventListener("click", closePopup);
+closeButtonAddForm.addEventListener("click", closePopup);
 addButton.addEventListener("click", openAddPopup);
+cardPopup.querySelector(".popup__close-button").addEventListener("click", closePopup);
 
 function createCardElement(card) {
   const elementNode = elementTemplate
@@ -119,8 +115,15 @@ function createCardElement(card) {
   elementNode
     .querySelector(".elements__element-image")
     .setAttribute("alt", `Фото ${card.name}`);
-  elementNode.querySelector(".elements__element-delete-button").addEventListener("click", deleteCard);
-  elementNode.querySelector(".elements__element-heart").addEventListener("click", toggleLikeCard);
+  elementNode
+    .querySelector(".elements__element-delete-button")
+    .addEventListener("click", deleteCard);
+  elementNode
+    .querySelector(".elements__element-image")
+    .addEventListener("click", openCardPopup);
+  elementNode
+    .querySelector(".elements__element-heart")
+    .addEventListener("click", toggleLikeCard);
   elementNode.querySelector(".elements__element-name").textContent = card.name;
   return elementNode;
 }
@@ -133,9 +136,21 @@ function addCards(cardArray) {
 }
 addCards(initialCards);
 
-function deleteCard(evt){
+function deleteCard(evt) {
   evt.target.closest(".elements__element").remove();
 }
-function toggleLikeCard(evt){
+function toggleLikeCard(evt) {
   evt.target.classList.toggle("elements__element-heart_active");
+}
+function openCardPopup(evt) {
+  const card = evt.target.closest(".elements__element");
+  console.log(card);
+  const cardLink = card.querySelector(".elements__element-image").getAttribute("src");
+  console.log(cardLink);
+  const cardName = card.querySelector(".elements__element-name").textContent;
+  console.log(cardName);
+  cardPopup.querySelector(".popup-figure__image").setAttribute("src", cardLink);
+  cardPopup.querySelector(".popup-figure__image").setAttribute("alt", `Фото ${cardName}`);
+  cardPopup.querySelector(".popup-figure__caption").textContent = cardName;
+  openPopup(cardPopup);
 }
