@@ -120,6 +120,7 @@ function createCardElement(card) {
     .querySelector(".elements__element-image")
     .setAttribute("alt", `Фото ${card.name}`);
   elementNode.querySelector(".elements__element-delete-button").addEventListener("click", deleteCard);
+  elementNode.querySelector(".elements__element-heart").addEventListener("click", toggleLikeCard);
   elementNode.querySelector(".elements__element-name").textContent = card.name;
   return elementNode;
 }
@@ -134,4 +135,7 @@ addCards(initialCards);
 
 function deleteCard(evt){
   evt.target.closest(".elements__element").remove();
+}
+function toggleLikeCard(evt){
+  evt.target.classList.toggle("elements__element-heart_active");
 }
