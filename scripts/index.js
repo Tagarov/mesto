@@ -76,8 +76,8 @@ function formAddSubmitHandler(evt) {
   const card = {};
   card.name = nameCardInput.value;
   card.link = linkCardInput.value;
-  console.log(card);
-  addElementToElementsSection(card);
+  const elementNode = createCardElement(card);
+  elementsSection.prepend(elementNode);
   closePopup(evt);
 }
 
@@ -109,7 +109,7 @@ closeButton.addEventListener("click", closePopup);
 closeButton2.addEventListener("click", closePopup);
 addButton.addEventListener("click", openAddPopup);
 
-function addElementToElementsSection(card) {
+function createCardElement(card) {
   const elementNode = elementTemplate
     .querySelector(".elements__element")
     .cloneNode(true);
@@ -119,11 +119,19 @@ function addElementToElementsSection(card) {
   elementNode
     .querySelector(".elements__element-image")
     .setAttribute("alt", `Фото ${card.name}`);
+  elementNode.querySelector(".elements__element-delete-button").addEventListener("click", deleteCard);
   elementNode.querySelector(".elements__element-name").textContent = card.name;
-  elementsSection.append(elementNode);
+  return elementNode;
 }
 
 function addCards(cardArray) {
-  cardArray.forEach((card) => addElementToElementsSection(card));
+  cardArray.forEach((card) => {
+    const elementNode = createCardElement(card);
+    elementsSection.append(elementNode);
+  });
 }
 addCards(initialCards);
+
+function deleteCard(evt){
+  evt.target.closest(".elements__element").remove();
+}
