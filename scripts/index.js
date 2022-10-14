@@ -144,11 +144,8 @@ function toggleLikeCard(evt) {
 }
 function openCardPopup(evt) {
   const card = evt.target.closest(".elements__element");
-  console.log(card);
   const cardLink = card.querySelector(".elements__element-image").getAttribute("src");
-  console.log(cardLink);
   const cardName = card.querySelector(".elements__element-name").textContent;
-  console.log(cardName);
   cardPopup.querySelector(".popup-figure__image").setAttribute("src", cardLink);
   cardPopup.querySelector(".popup-figure__image").setAttribute("alt", `Фото ${cardName}`);
   cardPopup.querySelector(".popup-figure__caption").textContent = cardName;
