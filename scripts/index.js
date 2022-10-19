@@ -54,7 +54,12 @@ function handleSubmitAddForm(evt) {
 function openEditPopup() {
   nameInput.value = profileName.textContent;
   jobInput.value = profileDesc.textContent;
-
+  //На случай закрытия попапа без сохранения, посылаем событие input, для валидации полей
+  //иначе предыддущая ошибка сохраниться
+  const event = new Event("input");
+  nameInput.dispatchEvent(event);
+  jobInput.dispatchEvent(event);
+  //Открываем попап 
   openPopup(popupEditProfile);
 }
 

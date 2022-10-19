@@ -1,0 +1,21 @@
+.popup__error_visible {
+  /* display: block;
+    width: 358px;
+    margin: 5px auto 13px;
+     */
+  position: absolute;
+  width: 358px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: "Inter", Arial, Helvetica, sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.25;
+  color: red;
+}
+
+@media screen and (max-width: 678px) {
+  .popup__error_visible {
+    width: 238px;
+  }
+}
