@@ -19,12 +19,26 @@ const elementCaptionCardPopup = cardPopup.querySelector(
   ".popup-figure__caption"
 );
 
+
+const keyHandler = (evt) => {
+  if (evt.key === "Escape") {
+    const openedpopup = Array.from(allPopups).find((popup) => {
+      return popup.classList.contains("popup_opened");
+    });
+    if (openedpopup) {
+      closePopup(openedpopup);
+    }
+  }
+};
+
 function openPopup(popup) {
   popup.classList.add("popup_opened");
+  document.addEventListener("keydown", keyHandler);
 }
 
 function closePopup(popup) {
   popup.classList.remove("popup_opened");
+  document.removeEventListener("keydown", keyHandler);
 }
 
 function handleAllPopupsCloseBtns() {
@@ -40,19 +54,6 @@ function handleAllPopupsCloseBtns() {
     });
   });
 }
-
-//Закрытие попапа по кнопке ESC
-function keyHandler(evt) {
-  if (evt.key === "Escape") {
-    const openedpopup = Array.from(allPopups).find((popup) => {
-      return popup.classList.contains("popup_opened");
-    });
-    if(openedpopup){
-      closePopup(openedpopup);
-    }
-  }
-}
-
 
 function handleSubmitEditForm(evt) {
   evt.preventDefault();
@@ -134,4 +135,3 @@ addButton.addEventListener("click", openAddPopup);
 formProfileEdit.addEventListener("submit", handleSubmitEditForm);
 formAddElement.addEventListener("submit", handleSubmitAddForm);
 handleAllPopupsCloseBtns();
-document.addEventListener("keydown", keyHandler);
