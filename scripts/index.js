@@ -1,6 +1,6 @@
 const allPopups = document.querySelectorAll(".popup");
-const editButton = document.querySelector(".profile__edit-button");
-const addButton = document.querySelector(".profile__add-button");
+const buttonEditProfile = document.querySelector(".profile__edit-button");
+const buttonAddCard = document.querySelector(".profile__add-button");
 const profileName = document.querySelector(".profile__person");
 const profileDesc = document.querySelector(".profile__person-description");
 const elementsSection = document.querySelector(".elements");
@@ -13,6 +13,7 @@ const popupAddCard = document.querySelector(".popup_form_add-place");
 const formAddElement = popupAddCard.querySelector(".popup__form");
 const nameCardInput = formAddElement.querySelector(".popup__input_place_name");
 const linkCardInput = formAddElement.querySelector(".popup__input_place_link");
+const buttonSubmitFormAdd = formAddElement.querySelector(".popup__button");
 const cardPopup = document.querySelector(".popup_type_card");
 const elementImageCardPopup = cardPopup.querySelector(".popup-figure__image");
 const elementCaptionCardPopup = cardPopup.querySelector(
@@ -20,7 +21,7 @@ const elementCaptionCardPopup = cardPopup.querySelector(
 );
 
 
-const keyHandler = (evt) => {
+const handleEscKeyToClosePopup = (evt) => {
   if (evt.key === "Escape") {
     const openedpopup = Array.from(allPopups).find((popup) => {
       return popup.classList.contains("popup_opened");
@@ -33,12 +34,12 @@ const keyHandler = (evt) => {
 
 function openPopup(popup) {
   popup.classList.add("popup_opened");
-  document.addEventListener("keydown", keyHandler);
+  document.addEventListener("keydown", handleEscKeyToClosePopup);
 }
 
 function closePopup(popup) {
   popup.classList.remove("popup_opened");
-  document.removeEventListener("keydown", keyHandler);
+  document.removeEventListener("keydown", handleEscKeyToClosePopup);
 }
 
 function handleAllPopupsCloseBtns() {
@@ -86,6 +87,11 @@ function openEditPopup() {
 }
 
 function openAddPopup() {
+  if (!nameCardInput.value || !linkCardInput.value) {
+    // сделай кнопку неактивной
+    buttonSubmitFormAdd.classList.add('popup__button_disabled');
+    buttonSubmitFormAdd.setAttribute('disabled','true');
+  }
   openPopup(popupAddCard);
 }
 
@@ -130,8 +136,8 @@ function addCards(cardArray) {
 }
 
 addCards(initialCards);
-editButton.addEventListener("click", openEditPopup);
-addButton.addEventListener("click", openAddPopup);
+buttonEditProfile.addEventListener("click", openEditPopup);
+buttonAddCard.addEventListener("click", openAddPopup);
 formProfileEdit.addEventListener("submit", handleSubmitEditForm);
 formAddElement.addEventListener("submit", handleSubmitAddForm);
 handleAllPopupsCloseBtns();
