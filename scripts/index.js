@@ -2,7 +2,7 @@ const elementsSection = document.querySelector(".elements");
 
 function addCards(cardArray) {
   cardArray.forEach((item) => {
-    const card = new Card(item);
+    const card = new Card(item, "#element-template");
     const cardElement = card.generateCard();
     elementsSection.append(cardElement);
   });

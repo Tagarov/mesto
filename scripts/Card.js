@@ -8,9 +8,10 @@ const popupElementCloseButton = popupElement.querySelector(
 );
 
 class Card {
-  constructor(data) {
+  constructor(data, templateSelector) {
     this._name = data.name;
     this._link = data.link;
+    this._templateSelector = templateSelector;
   }
 
   _handleEscKeyToClosePopup = (evt) => {
@@ -22,7 +23,7 @@ class Card {
   _getTemplate() {
     // забираем разметку из HTML и клонируем элемент
     const cardElement = document
-      .querySelector("#element-template")
+      .querySelector(this._templateSelector)
       .content.querySelector(".elements__element")
       .cloneNode(true);
     // вернём DOM-элемент карточки
@@ -41,12 +42,25 @@ class Card {
     popupElement.classList.remove("popup_opened");
     document.removeEventListener("keydown", this._handleEscKeyToClosePopup);
   }
+  _deleteCard(evt) {
+    evt.target.closest(".elements__element").remove();
+  }
+
+  _toggleLikeCard(evt) {
+    evt.target.classList.toggle("elements__element-heart_active");
+  }
 
   _setEventListeners() {
-    this._element.addEventListener("click", () => this._handleOpenPopup());
+    this._elementImage.addEventListener("click", () => this._handleOpenPopup());
     popupElementCloseButton.addEventListener("click", () =>
       this._handleClosePopup()
     );
+    this._element
+    .querySelector(".elements__element-delete-button")
+    .addEventListener("click", this._deleteCard);
+    this._element
+    .querySelector(".elements__element-heart")
+    .addEventListener("click", this._toggleLikeCard);
   }
 
   generateCard() {
@@ -56,11 +70,12 @@ class Card {
 
     this._element.querySelector(".elements__element-name").textContent =
       this._name;
-    const elementImage = this._element.querySelector(
+    this._elementImage = this._element.querySelector(
       ".elements__element-image"
     );
-    elementImage.setAttribute("src", this._link);
-    elementImage.setAttribute("alt", `Фото ${this._name}`);
+    this._elementImage.setAttribute("src", this._link);
+    this._elementImage.setAttribute("alt", `Фото ${this._name}`);
+
     this._setEventListeners();
 
     return this._element;
