@@ -7,7 +7,7 @@ const popupElementCloseButton = popupElement.querySelector(
   ".popup__close-button"
 );
 
-class Card {
+export default class Card {
   constructor(data, templateSelector) {
     this._name = data.name;
     this._link = data.link;

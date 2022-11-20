@@ -1,15 +1,8 @@
+import Card from "../scripts/Card.js";
+import FormValidator from "../scripts/FormValidator.js";
+import { initialCards } from "../scripts/cards.js";
+
 const elementsSection = document.querySelector(".elements");
-
-function addCards(cardArray) {
-  cardArray.forEach((item) => {
-    const card = new Card(item, "#element-template");
-    const cardElement = card.generateCard();
-    elementsSection.append(cardElement);
-  });
-}
-
-addCards(initialCards);
-
 const allPopups = document.querySelectorAll(".popup");
 const buttonEditProfile = document.querySelector(".profile__edit-button");
 const buttonAddCard = document.querySelector(".profile__add-button");
@@ -31,6 +24,39 @@ const buttonSubmitFormAdd = formAddElement.querySelector(".popup__button");
 // const elementCaptionCardPopup = cardPopup.querySelector(
 //   ".popup-figure__caption"
 // );
+
+const valObj = {
+  formSelector: ".popup__form",
+  inputSelector: ".popup__input",
+  submitButtonSelector: ".popup__button",
+  inactiveButtonClass: "popup__button_disabled",
+  inputErrorClass: "popup__input_type_error",
+  errorClass: "popup__error_visible",
+};
+
+const enableFormValidation = () => {
+  const formList = Array.from(document.querySelectorAll(valObj.formSelector));
+  // Найдём все формы с указанным классом в DOM,
+  // сделаем из них массив методом Array.from
+  // Переберём полученную коллекцию
+  formList.forEach((formElement) => {
+    // Для каждой формы вызовем функцию создадим объект FormValidator,
+    // передав ему элемент формы и обект с параметрами
+    const formValidatorElement = new FormValidator(valObj, formElement);
+    //активируем валиидацию
+    formValidatorElement.enableValidation();
+  });
+};
+
+function addCards(cardArray) {
+  cardArray.forEach((item) => {
+    const card = new Card(item, "#element-template");
+    const cardElement = card.generateCard();
+    elementsSection.append(cardElement);
+  });
+}
+
+addCards(initialCards);
 
 const handleEscKeyToClosePopup = (evt) => {
   if (evt.key === "Escape") {
@@ -152,4 +178,5 @@ buttonEditProfile.addEventListener("click", openEditPopup);
 buttonAddCard.addEventListener("click", openAddPopup);
 formProfileEdit.addEventListener("submit", handleSubmitEditForm);
 formAddElement.addEventListener("submit", handleSubmitAddForm);
+enableFormValidation();
 handleAllPopupsCloseBtns();
