@@ -1,17 +1,17 @@
 .popup__container {
-    position: relative;
-    margin: auto;
-    width: 430px;
-    min-height: 330px;
-    box-sizing: border-box;
-    padding: 0px;
-    background-color: #ffffff;
-    border-radius: 10px;
+  position: relative;
+  margin: auto;
+  width: 430px;
+  min-height: 330px;
+  box-sizing: border-box;
+  padding: 0px;
+  background-color: #ffffff;
+  border-radius: 10px;
 }
 
 @media screen and (max-width: 678px) {
-    .popup__container {
-        width: 282px;
-        min-height: 322px;
-    }
+  .popup__container {
+    width: 282px;
+    min-height: 322px;
+  }
 }

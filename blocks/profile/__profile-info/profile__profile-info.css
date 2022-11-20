@@ -1,13 +1,13 @@
-.profile__profile-info{
-    position: relative;
-    margin: 0 0 0 30px;
-    min-width: 282px;
+.profile__profile-info {
+  position: relative;
+  margin: 0 0 0 30px;
+  min-width: 282px;
 }
 
 @media screen and (max-width: 678px) {
-    .profile__profile-info{
-        max-width: 282px;
-        margin-left: 0;
-        margin-top: 26px;
-    }
+  .profile__profile-info {
+    max-width: 282px;
+    margin-left: 0;
+    margin-top: 26px;
+  }
 }

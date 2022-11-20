@@ -56,11 +56,11 @@ class Card {
       this._handleClosePopup()
     );
     this._element
-    .querySelector(".elements__element-delete-button")
-    .addEventListener("click", this._deleteCard);
+      .querySelector(".elements__element-delete-button")
+      .addEventListener("click", this._deleteCard);
     this._element
-    .querySelector(".elements__element-heart")
-    .addEventListener("click", this._toggleLikeCard);
+      .querySelector(".elements__element-heart")
+      .addEventListener("click", this._toggleLikeCard);
   }
 
   generateCard() {

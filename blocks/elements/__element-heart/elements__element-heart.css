@@ -1,17 +1,17 @@
 .elements__element-heart {
-    width: 22px;
-    height: 19px;
-    margin: 30px 20px 0 0;
-    border: 0;
-    transition: opacity 0.3s;
-    background-color: #ffffff;
-    background-image: url(../../../images/heart.svg);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: 22px;
-    cursor: pointer;
+  width: 22px;
+  height: 19px;
+  margin: 30px 20px 0 0;
+  border: 0;
+  transition: opacity 0.3s;
+  background-color: #ffffff;
+  background-image: url(../../../images/heart.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 22px;
+  cursor: pointer;
 }
 
 .elements__element-heart:hover {
-    opacity: 0.6;
+  opacity: 0.6;
 }

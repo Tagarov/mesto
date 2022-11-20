@@ -18,11 +18,11 @@ const toggleButtonState = (valObj, inputList, buttonElement) => {
   if (hasInvalidInput(inputList)) {
     // сделай кнопку неактивной
     buttonElement.classList.add(valObj.inactiveButtonClass);
-    buttonElement.setAttribute('disabled','true');
+    buttonElement.setAttribute("disabled", "true");
   } else {
     // иначе сделай кнопку активной
     buttonElement.classList.remove(valObj.inactiveButtonClass);
-    buttonElement.removeAttribute('disabled','true');
+    buttonElement.removeAttribute("disabled", "true");
   }
 };
 
