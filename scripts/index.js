@@ -8,8 +8,6 @@ const buttonEditProfile = document.querySelector(".profile__edit-button");
 const buttonAddCard = document.querySelector(".profile__add-button");
 const profileName = document.querySelector(".profile__person");
 const profileDesc = document.querySelector(".profile__person-description");
-
-// const elementTemplate = document.querySelector("#element-template").content;
 const popupEditProfile = document.querySelector(".popup_form_edit-profile");
 const formProfileEdit = popupEditProfile.querySelector(".popup__form");
 const nameInput = formProfileEdit.querySelector(".popup__input_field_name");
@@ -19,11 +17,6 @@ const formAddElement = popupAddCard.querySelector(".popup__form");
 const nameCardInput = formAddElement.querySelector(".popup__input_place_name");
 const linkCardInput = formAddElement.querySelector(".popup__input_place_link");
 const buttonSubmitFormAdd = formAddElement.querySelector(".popup__button");
-// const cardPopup = document.querySelector(".popup_type_card");
-// const elementImageCardPopup = cardPopup.querySelector(".popup-figure__image");
-// const elementCaptionCardPopup = cardPopup.querySelector(
-//   ".popup-figure__caption"
-// );
 
 const valObj = {
   formSelector: ".popup__form",
@@ -55,8 +48,6 @@ function addCards(cardArray) {
     elementsSection.append(cardElement);
   });
 }
-
-addCards(initialCards);
 
 const handleEscKeyToClosePopup = (evt) => {
   if (evt.key === "Escape") {
@@ -133,47 +124,7 @@ function openAddPopup() {
   openPopup(popupAddCard);
 }
 
-// function deleteCard(evt) {
-//   evt.target.closest(".elements__element").remove();
-// }
-
-// function toggleLikeCard(evt) {
-//   evt.target.classList.toggle("elements__element-heart_active");
-// }
-
-// function openCardPopup(card) {
-//   elementImageCardPopup.setAttribute("src", card.link);
-//   elementImageCardPopup.setAttribute("alt", `Фото ${card.name}`);
-//   elementCaptionCardPopup.textContent = card.name;
-//   openPopup(cardPopup);
-// }
-
-// function createCardElement(card) {
-//   const elementNode = elementTemplate
-//     .querySelector(".elements__element")
-//     .cloneNode(true);
-//   const elementImage = elementNode.querySelector(".elements__element-image");
-//   elementImage.setAttribute("src", card.link);
-//   elementImage.setAttribute("alt", `Фото ${card.name}`);
-//   elementNode
-//     .querySelector(".elements__element-delete-button")
-//     .addEventListener("click", deleteCard);
-//   elementNode
-//     .querySelector(".elements__element-heart")
-//     .addEventListener("click", toggleLikeCard);
-//   elementNode.querySelector(".elements__element-name").textContent = card.name;
-//   elementImage.addEventListener("click", () => openCardPopup(card));
-//   return elementNode;
-// }
-
-// function addCards(cardArray) {
-//   cardArray.forEach((card) => {
-//     const elementNode = createCardElement(card);
-//     elementsSection.append(elementNode);
-//   });
-// }
-
-// addCards(initialCards);
+addCards(initialCards);
 buttonEditProfile.addEventListener("click", openEditPopup);
 buttonAddCard.addEventListener("click", openAddPopup);
 formProfileEdit.addEventListener("submit", handleSubmitEditForm);
