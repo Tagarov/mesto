@@ -34,7 +34,9 @@ export default class FormValidator {
 
   _showInputError = (inputElement, errorMessage) => {
     // Находим элемент ошибки внутри самой функции
-    const errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);
+    const errorElement = this._formElement.querySelector(
+      `.${inputElement.id}-error`
+    );
     // Добавляем классы для ошибки валидации и очищаем текст ошибки
     inputElement.classList.add(this._valObj.inputErrorClass);
     errorElement.textContent = errorMessage;
@@ -43,7 +45,9 @@ export default class FormValidator {
 
   _hideInputError = (inputElement) => {
     // Находим элемент ошибки
-    const errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);
+    const errorElement = this._formElement.querySelector(
+      `.${inputElement.id}-error`
+    );
     // Убираем классы для ошибки валидации и очищаем текст ошибки
     inputElement.classList.remove(this._valObj.inputErrorClass);
     errorElement.classList.remove(this._valObj.errorClass);
