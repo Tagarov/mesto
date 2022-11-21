@@ -1,24 +1,10 @@
-const popupElement = document.querySelector(".popup_type_card");
-const popupElementImage = popupElement.querySelector(".popup-figure__image");
-const popupElementCaption = popupElement.querySelector(
-  ".popup-figure__caption"
-);
-const popupElementCloseButton = popupElement.querySelector(
-  ".popup__close-button"
-);
-
 export default class Card {
-  constructor(data, templateSelector) {
+  constructor(data, templateSelector, handleOpenPopup) {
     this._name = data.name;
     this._link = data.link;
     this._templateSelector = templateSelector;
+    this._handleOpenPopup = handleOpenPopup;
   }
-
-  _handleEscKeyToClosePopup = (evt) => {
-    if (evt.key === "Escape") {
-      this._handleClosePopup();
-    }
-  };
 
   _getTemplate() {
     // забираем разметку из HTML и клонируем элемент
@@ -30,20 +16,8 @@ export default class Card {
     return cardElement;
   }
 
-  _handleOpenPopup() {
-    popupElementImage.setAttribute("src", this._link);
-    popupElementImage.setAttribute("alt", `Фото ${this._name}`);
-    popupElementCaption.textContent = this._name;
-    popupElement.classList.add("popup_opened");
-    document.addEventListener("keydown", this._handleEscKeyToClosePopup);
-  }
-
-  _handleClosePopup() {
-    popupElement.classList.remove("popup_opened");
-    document.removeEventListener("keydown", this._handleEscKeyToClosePopup);
-  }
-  _deleteCard(evt) {
-    evt.target.closest(".elements__element").remove();
+  _deleteCard = () => {
+    this._element.remove();
   }
 
   _toggleLikeCard(evt) {
@@ -51,9 +25,8 @@ export default class Card {
   }
 
   _setEventListeners() {
-    this._elementImage.addEventListener("click", () => this._handleOpenPopup());
-    popupElementCloseButton.addEventListener("click", () =>
-      this._handleClosePopup()
+    this._elementImage.addEventListener("click", () =>
+      this._handleOpenPopup({ name: this._name, link: this._link })
     );
     this._element
       .querySelector(".elements__element-delete-button")

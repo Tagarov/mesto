@@ -5,9 +5,9 @@ export default class FormValidator {
   }
 
   // функция проверки валидности всех полей в форме
-  _hasInvalidInput = (inputList) => {
+  _hasInvalidInput = () => {
     // проходим по этому массиву методом some
-    return inputList.some((inputElement) => {
+    return this._inputList.some((inputElement) => {
       // Если поле не валидно, колбэк вернёт true
       // Обход массива прекратится и вся функция
       // hasInvalidInput вернёт true
@@ -16,19 +16,20 @@ export default class FormValidator {
     });
   };
 
-  // Функция принимает массив полей ввода
-  // и элемент кнопки, состояние которой нужно менять
+  disableButton() {
+    this._buttonElement.classList.add(this._valObj.inactiveButtonClass);
+    this._buttonElement.setAttribute("disabled", "true");
+  }
 
-  _toggleButtonState = (inputList, buttonElement) => {
+  _toggleButtonState = () => {
     // Если есть хотя бы один невалидный инпут
-    if (this._hasInvalidInput(inputList)) {
+    if (this._hasInvalidInput()) {
       // сделай кнопку неактивной
-      buttonElement.classList.add(this._valObj.inactiveButtonClass);
-      buttonElement.setAttribute("disabled", "true");
+      this.disableButton();
     } else {
       // иначе сделай кнопку активной
-      buttonElement.classList.remove(this._valObj.inactiveButtonClass);
-      buttonElement.removeAttribute("disabled", "true");
+      this._buttonElement.classList.remove(this._valObj.inactiveButtonClass);
+      this._buttonElement.removeAttribute("disabled", "true");
     }
   };
 
@@ -57,7 +58,7 @@ export default class FormValidator {
   // Функция isValid теперь принимает formElement и inputElement,
   // а не берёт их из внешней области видимости
 
-  _isValid = (inputElement) => {
+  _toggleInputErrorState = (inputElement) => {
     if (!inputElement.validity.valid) {
       // showInputError теперь получает параметром форму, в которой
       // находится проверяемое поле, и само это поле
@@ -72,30 +73,30 @@ export default class FormValidator {
   _setEventListeners() {
     // Находим все поля внутри формы,
     // сделаем из них массив методом Array.from
-    const inputList = Array.from(
+    this._inputList = Array.from(
       this._formElement.querySelectorAll(this._valObj.inputSelector)
     );
     // Найдём в текущей форме кнопку отправки
-    const buttonElement = this._formElement.querySelector(
+    this._buttonElement = this._formElement.querySelector(
       this._valObj.submitButtonSelector
     );
     // Обойдём все элементы полученной коллекции
-    inputList.forEach((inputElement) => {
-      // каждому полю добавим обработчик события input
+    this._inputList.forEach((inputElement) => {
       inputElement.addEventListener("input", () => {
-        // Внутри колбэка вызовем isValid,
-        // передав ей форму и проверяемый элемент
-        this._isValid(inputElement);
-
-        // Вызовем toggleButtonState и передадим ей массив полей и кнопку
-        this._toggleButtonState(inputList, buttonElement);
+        this._toggleInputErrorState(inputElement);
+        this._toggleButtonState();
       });
     });
   }
 
+  clearErrors() {
+    this._inputList.forEach((inputElement) => {
+      this._toggleInputErrorState(inputElement);
+    });
+    this._toggleButtonState();
+  }
+
   enableValidation() {
-    // Для каждой формы вызовем функцию setEventListeners,
-    // передав ей элемент формы
     this._setEventListeners();
   }
 }
