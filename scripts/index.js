@@ -1,8 +1,10 @@
 import Card from "../scripts/Card.js";
 import FormValidator from "../scripts/FormValidator.js";
+import Section from "./Section.js";
 import { initialCards, valObj } from "./constants.js";
 
 const elementsSection = document.querySelector(".elements");
+const cardListSection = ".elements";
 const allPopups = document.querySelectorAll(".popup");
 const buttonEditProfile = document.querySelector(".profile__edit-button");
 const buttonAddCard = document.querySelector(".profile__add-button");
@@ -107,7 +109,23 @@ function openAddPopup() {
   openPopup(popupAddCard);
 }
 
-addCards(initialCards);
+//addCards(initialCards);
+
+const cardList = new Section(
+  {
+    items: initialCards,
+    renderer: (cardItem) => {
+      const card = new Card(cardItem, "#element-template", handleOpenCardPopup);
+      const cardElement = card.generateCard();
+      cardList.addItem(cardElement);
+    },
+  },
+  cardListSection
+);
+
+cardList.renderItems();
+
+
 validatorFormAddCard.enableValidation();
 validatorFormEditProfile.enableValidation();
 buttonEditProfile.addEventListener("click", openEditPopup);
