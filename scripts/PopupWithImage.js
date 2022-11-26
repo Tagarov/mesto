@@ -13,7 +13,4 @@ export default class PopupWithImage extends Popup {
     elementCaptionCardPopup.textContent = name;
     super.open();
   }
-//   handleCardClick = (card) => {
-//     this.open(card);
-//   };
 }
