@@ -25,10 +25,10 @@ export default class PopupWithForm extends Popup {
   }
   setInputValues(inputValues) {
     for (let key in inputValues) {
-        const input = this._form.querySelector(`input[name="${key}"]`)
-        if (input){
-            input.value = inputValues[key];
-        }
+      const input = this._form.querySelector(`input[name="${key}"]`);
+      if (input) {
+        input.value = inputValues[key];
+      }
     }
   }
 }

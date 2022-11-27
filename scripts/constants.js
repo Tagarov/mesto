@@ -33,4 +33,4 @@ export const valObj = {
   inputErrorClass: "popup__input_type_error",
   errorClass: "popup__error_visible",
 };
-export const cardListSection = ".elements";;
+export const cardListSection = ".elements";

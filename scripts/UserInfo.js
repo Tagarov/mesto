@@ -10,9 +10,8 @@ export default class UserInfo {
     };
     return userInfo;
   }
-  setUserInfo(user){
+  setUserInfo(user) {
     this._name.textContent = user.name;
     this._info.textContent = user.info;
-    console.log("ghbdtn")
   }
 }
