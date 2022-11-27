@@ -4,7 +4,6 @@ export default class Popup {
   }
   _handleEscClose = (evt) => {
     if (evt.key === "Escape") {
-      const popupOpened = document.querySelector(".popup_opened");
       this.close();
     }
   };
@@ -21,7 +20,10 @@ export default class Popup {
 
   setEventListeners() {
     // Закрытие попал на оверлей или кнопку закрытия
-    this._popup.addEventListener("click", (evt) => {
+    // используем событие 'mousedown', а не click, чтобы не закрыть случайно попап
+    // по оверлею, если нажать мышкой внутри попапа, а потом, не разжимая, 
+    // передвинуть курсор на оверлей. Такой баг появляется с событием click.
+    this._popup.addEventListener("mousedown", (evt) => {
       if (
         evt.target.classList.contains("popup") ||
         evt.target.classList.contains("popup__close-button")
