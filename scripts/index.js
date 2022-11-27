@@ -16,7 +16,6 @@ const formAddElement = popupAddCard.querySelector(".popup__form");
 const cardPopup = new PopupWithImage(".popup_type_card");
 cardPopup.setEventListeners();
 const user = new UserInfo(".profile__person", ".profile__person-description");
-console.log(user.getUserInfo());
 const validatorFormAddCard = new FormValidator(valObj, formAddElement);
 const validatorFormEditProfile = new FormValidator(valObj, formProfileEdit);
 
@@ -28,7 +27,6 @@ const handleSubmitEditForm = (evt) => {
 
 const handleSubmitAddForm = (evt) => {
   evt.preventDefault();
-  console.log("Обработка формы добавления карточки");
   const cardItem = popupFormAddCard._getInputValues();
   const card = new Card(
     cardItem,
