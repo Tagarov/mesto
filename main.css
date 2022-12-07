@@ -743,6 +743,7 @@ template {
 }
 
 .popup_opened {
+  position: fixed;
   display: flex;
   visibility: visible;
   opacity: 1;
