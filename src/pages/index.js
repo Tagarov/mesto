@@ -1,4 +1,4 @@
-import './index.css';
+import "./index.css";
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
@@ -6,6 +6,7 @@ import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
 
+//import { initialCards, valObj, cardListSection } from "../utils/constants.js";
 import { initialCards, valObj, cardListSection } from "../utils/constants.js";
 
 const buttonEditProfile = document.querySelector(".profile__edit-button");
@@ -52,17 +53,9 @@ const createCard = (cardItem) => {
     cardPopup.open.bind(cardPopup)
   );
   return card.generateCard();
-}
+};
 
-const cardList = new Section(
-  {
-    items: initialCards,
-    renderer: createCard
-  },
-  cardListSection
-);
 
-cardList.renderItems();
 
 validatorFormAddCard.enableValidation();
 validatorFormEditProfile.enableValidation();
@@ -79,3 +72,54 @@ const popupFormEditProfile = new PopupWithForm(
   handleSubmitEditForm
 );
 popupFormEditProfile.setEventListeners();
+
+const getUserFromServer = () => {
+  console.log(user.getUserInfo());
+  fetch("https://nomoreparties.co/v1/cohort-54/users/me ", {
+    method: "GET",
+    headers: {
+      authorization: "55cf33fe-b700-4b09-9625-cce358d02d0f",
+    },
+  })
+    .then((res) => res.json())
+    .then((result) => {
+      console.log(result);
+      user.setUserInfo(result);
+      console.log(user.getUserInfo());
+    });
+};
+
+//setTimeout(getUserFromServer, 5000);
+getUserFromServer();
+
+let initialCardsFromServer = [];
+let cardList = new Section(
+  {
+    items: initialCardsFromServer,
+    renderer: createCard,
+  },
+  cardListSection
+);
+cardList.renderItems();   
+
+
+
+
+console.log(initialCardsFromServer);
+
+const getCardsFromServer = () => {
+  fetch("https://mesto.nomoreparties.co/v1/cohort-54/cards", {
+    headers: {
+      authorization: "55cf33fe-b700-4b09-9625-cce358d02d0f",
+    },
+  })
+    .then((res) => res.json())
+    .then((result) => {
+      result.forEach(item => cardList.addFirstItem(item));
+    });
+};
+
+initialCardsFromServer = getCardsFromServer();
+console.log("vfccndlfks");
+console.log(initialCardsFromServer);
+

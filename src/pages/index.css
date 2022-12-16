@@ -19,8 +19,10 @@
 @import url(../blocks/elements/__element-delete-button/elements__element-delete-button.css);
 @import url(../blocks/elements/__title-container/elements__title-container.css);
 @import url(../blocks/elements/__element-name/elements__element-name.css);
+@import url(../blocks/elements/__element-like-container/elements__element-like-container.css);
 @import url(../blocks/elements/__element-heart/elements__element-heart.css);
 @import url(../blocks/elements/__element-heart/_active/elements__element-heart_active.css);
+@import url(../blocks/elements/__element-like-counter/elements__element-like-counter.css);
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copy/footer__copy.css);
 @import url(../blocks/popup/popup.css);

@@ -1,0 +1,7 @@
+.elements__element-like-container {
+    display: flex;
+    flex-direction: column;
+    margin: 0 0;
+    padding-top: 22px;
+    width: 62px;
+}

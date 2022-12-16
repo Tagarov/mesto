@@ -1,0 +1,14 @@
+.elements__element-like-counter {
+  margin: 3px auto 0;
+  color: black;
+  text-align: center;
+  font-family: "Inter", Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 1.23;
+  max-width: 80%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
