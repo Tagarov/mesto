@@ -4,6 +4,7 @@ export default class Card {
     this._link = data.link;
     this._templateSelector = templateSelector;
     this._handleOpenPopup = handleCardClick;
+    this._likeCounter = data.likes.length;
   }
 
   _getTemplate() {
@@ -48,6 +49,11 @@ export default class Card {
     );
     this._elementImage.setAttribute("src", this._link);
     this._elementImage.setAttribute("alt", `Фото ${this._name}`);
+
+    this._elementLikeCounter =  this._element.querySelector(
+      ".elements__element-like-counter"
+    );
+    this._elementLikeCounter.textContent = this._likeCounter;
 
     this._setEventListeners();
 
