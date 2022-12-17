@@ -5,9 +5,10 @@ import Section from "../components/Section.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
+import Api from "../components/Api.js";
 
 //import { initialCards, valObj, cardListSection } from "../utils/constants.js";
-import { initialCards, valObj, cardListSection } from "../utils/constants.js";
+import { valObj, cardListSection, token, cohortNumber } from "../utils/constants.js";
 
 const buttonEditProfile = document.querySelector(".profile__edit-button");
 const buttonAddCard = document.querySelector(".profile__add-button");
@@ -23,7 +24,12 @@ const validatorFormEditProfile = new FormValidator(valObj, formProfileEdit);
 
 const handleSubmitEditForm = (evt) => {
   evt.preventDefault();
-  user.setUserInfo(popupFormEditProfile.getInputValues());
+  //user.setUserInfo(popupFormEditProfile.getInputValues());
+  client
+    .updateProfileInfo(popupFormEditProfile.getInputValues())
+    .then((result) => {
+      user.setUserInfo(result);
+    });
   popupFormEditProfile.close();
 };
 
@@ -55,8 +61,6 @@ const createCard = (cardItem) => {
   return card.generateCard();
 };
 
-
-
 validatorFormAddCard.enableValidation();
 validatorFormEditProfile.enableValidation();
 buttonEditProfile.addEventListener("click", openEditPopup);
@@ -73,25 +77,6 @@ const popupFormEditProfile = new PopupWithForm(
 );
 popupFormEditProfile.setEventListeners();
 
-const getUserFromServer = () => {
-  console.log(user.getUserInfo());
-  fetch("https://nomoreparties.co/v1/cohort-54/users/me ", {
-    method: "GET",
-    headers: {
-      authorization: "55cf33fe-b700-4b09-9625-cce358d02d0f",
-    },
-  })
-    .then((res) => res.json())
-    .then((result) => {
-      console.log(result);
-      user.setUserInfo(result);
-      console.log(user.getUserInfo());
-    });
-};
-
-//setTimeout(getUserFromServer, 5000);
-getUserFromServer();
-
 let initialCardsFromServer = [];
 let cardList = new Section(
   {
@@ -100,26 +85,12 @@ let cardList = new Section(
   },
   cardListSection
 );
-cardList.renderItems();   
 
-
-
-
-console.log(initialCardsFromServer);
-
-const getCardsFromServer = () => {
-  fetch("https://mesto.nomoreparties.co/v1/cohort-54/cards", {
-    headers: {
-      authorization: "55cf33fe-b700-4b09-9625-cce358d02d0f",
-    },
-  })
-    .then((res) => res.json())
-    .then((result) => {
-      result.forEach(item => cardList.addFirstItem(item));
-    });
-};
-
-initialCardsFromServer = getCardsFromServer();
-console.log("vfccndlfks");
-console.log(initialCardsFromServer);
-
+const client = new Api(token, cohortNumber);
+client.getCardsFromServer().then((result) => {
+  initialCardsFromServer.push(...result);
+  cardList.renderItems();
+});
+client.getUserFromServer().then((result) => {
+  user.setUserInfo(result);
+});

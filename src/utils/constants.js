@@ -34,3 +34,5 @@ export const valObj = {
   errorClass: "popup__error_visible",
 };
 export const cardListSection = ".elements";
+export const token = "55cf33fe-b700-4b09-9625-cce358d02d0f"
+export const cohortNumber = 54;
