@@ -1,11 +1,12 @@
 export default class Card {
-  constructor(data, templateSelector, handleElementClick, handleDeleteClick) {
+  constructor(data, templateSelector, handleElementClick, handleDeleteClick, handleLikeClick) {
     this._name = data.name;
     this._link = data.link;
     this._templateSelector = templateSelector;
     this._handleOpenPopup = handleElementClick;
     this._handleOpenDeletePopup = handleDeleteClick;
-    this._likeCounter = data.likes.length;
+    this._handleLikeClick = handleLikeClick;
+    this._likes = data.likes;
     this._id = data._id;
     this._owner = data.owner;
   }
@@ -24,8 +25,8 @@ export default class Card {
     this._element.remove();
   };
 
-  _toggleLikeCard(evt) {
-    evt.target.classList.toggle("elements__element-heart_active");
+  _toggleLikeCard() {
+    this._elementLike.classList.toggle("elements__element-heart_active");
   }
 
   _setEventListeners() {
@@ -35,15 +36,27 @@ export default class Card {
     this._elementDeleteButton.addEventListener("click", () =>
       this._handleOpenDeletePopup(this)
     );
-    this._element
-      .querySelector(".elements__element-heart")
-      .addEventListener("click", this._toggleLikeCard);
+    this._elementLike
+      .addEventListener("click", () => {
+        this._handleLikeClick(this);
+      });
   }
-  _isCardMine(clientId) {
-    return this._owner._id === clientId;
+  _isCardMine(userId) {
+    return this._owner._id === userId;
+  }
+  isLikedByMe(userId) {
+    if(this._likes.find(item => item._id === userId)) {
+      return true;
+    }
+    return false;
+  }
+  updateLike(likes) {
+    this._likes = likes;
+    this._toggleLikeCard();
+    this._elementLikeCounter.textContent = this._likes.length;
   }
 
-  generateCard() {
+  generateCard(userId) {
     //Получаем DOM-элемент карточки
     this._element = this._getTemplate();
     //Заполняем DOM-элемент карточки данными из свойств карточки
@@ -56,19 +69,26 @@ export default class Card {
     this._elementImage.setAttribute("src", this._link);
     this._elementImage.setAttribute("alt", `Фото ${this._name}`);
 
+    this._elementLike = this._element
+      .querySelector(".elements__element-heart");
+
     this._elementLikeCounter = this._element.querySelector(
       ".elements__element-like-counter"
     );
-    this._elementLikeCounter.textContent = this._likeCounter;
+    this._elementLikeCounter.textContent = this._likes.length;
 
     this._elementDeleteButton = this._element.querySelector(
       ".elements__element-delete-button"
     );
 
-    if (this._isCardMine("2c24b0e4cc7402d0f2609066")) {
+    if (this._isCardMine(userId)) {
       this._elementDeleteButton.classList.remove(
         "elements__element-delete-button_disable"
       );
+    }
+
+    if (this.isLikedByMe(userId)) {
+      this._toggleLikeCard();
     }
 
     this._setEventListeners();

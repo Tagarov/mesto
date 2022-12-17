@@ -13,6 +13,7 @@ export default class UserInfo {
     return userInfo;
   }
   setUserInfo(user) {
+    this.id = user._id;
     this._name.textContent = user.name;
     this._about.textContent = user.about;
     if (typeof user['avatar'] !== "undefined") {

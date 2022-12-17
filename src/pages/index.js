@@ -62,9 +62,10 @@ const createCard = (cardItem) => {
     cardItem,
     "#element-template",
     cardPopup.open.bind(cardPopup),
-    cardDeletePopup.open.bind(cardDeletePopup)
+    cardDeletePopup.open.bind(cardDeletePopup),
+    handleCardLikeClick
   );
-  return card.generateCard();
+  return card.generateCard(user.id);
 };
 
 validatorFormAddCard.enableValidation();
@@ -98,6 +99,7 @@ client.getCardsFromServer().then((result) => {
   cardList.renderItems();
 });
 client.getUserFromServer().then((result) => {
+  console.log(result);
   user.setUserInfo(result);
 });
 
@@ -114,6 +116,17 @@ const cardDeletePopup = new PopupWithButton(
 );
 cardDeletePopup.setEventListeners();
 
+const handleCardLikeClick = (card) => {
+  if (card.isLikedByMe(user.id)) {
+    client.deleteLikeCard(card._id).then((result) => {
+      card.updateLike(result.likes);
+    });
+  } else {
+    client.putLikeCard(card._id).then((result) => {
+      card.updateLike(result.likes);
+    });
+  }
+};
 
 // client
 //   .addNewCard(initialCards[Math.floor(Math.random() * initialCards.length)])
