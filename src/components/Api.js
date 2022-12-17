@@ -21,19 +21,35 @@ export default class Api {
       {
         method: "GET",
         headers: {
-          authorization: "55cf33fe-b700-4b09-9625-cce358d02d0f",
+          authorization: this._token,
         },
       }
     ).then((res) => res.json());
   }
-  updateProfileInfo(data) {
-    return fetch("https://mesto.nomoreparties.co/v1/cohort-54/users/me", {
-      method: "PATCH",
-      headers: {
-        authorization: this._token,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    }).then((res) => res.json());
+  updateProfileInfo(profileInfo) {
+    return fetch(
+      "https://mesto.nomoreparties.co/v1/cohort-" + this._cohort + "/users/me",
+      {
+        method: "PATCH",
+        headers: {
+          authorization: this._token,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(profileInfo),
+      }
+    ).then((res) => res.json());
+  }
+  addNewCard(card) {
+    return fetch(
+      "https://mesto.nomoreparties.co/v1/cohort-" + this._cohort + "/cards",
+      {
+        method: "POST",
+        headers: {
+          authorization: this._token,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(card),
+      }
+    ).then((res) => res.json());
   }
 }

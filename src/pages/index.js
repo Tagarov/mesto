@@ -6,10 +6,14 @@ import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
 import Api from "../components/Api.js";
-
-//import { initialCards, valObj, cardListSection } from "../utils/constants.js";
-import { valObj, cardListSection, token, cohortNumber } from "../utils/constants.js";
-
+import {
+  //initialCards,
+  valObj,
+  cardListSection,
+  token,
+  cohortNumber,
+} from "../utils/constants.js";
+//console.log(initialCards[Math.floor(Math.random() * initialCards.length)]);
 const buttonEditProfile = document.querySelector(".profile__edit-button");
 const buttonAddCard = document.querySelector(".profile__add-button");
 //const popupEditProfile = document.querySelector(".popup_form_edit-profile");
@@ -36,7 +40,12 @@ const handleSubmitEditForm = (evt) => {
 const handleSubmitAddForm = (evt) => {
   evt.preventDefault();
   const cardItem = popupFormAddCard.getInputValues();
-  cardList.addFirstItem(cardItem);
+  client
+    .addNewCard(cardItem)
+    .then((result) => {
+      cardList.addFirstItem(result);
+    });
+  //cardList.addFirstItem(cardItem);
   popupFormAddCard.close();
 };
 
@@ -94,3 +103,9 @@ client.getCardsFromServer().then((result) => {
 client.getUserFromServer().then((result) => {
   user.setUserInfo(result);
 });
+
+// client
+//   .addNewCard(initialCards[Math.floor(Math.random() * initialCards.length)])
+//   .then((result) => {
+//     console.log(result);
+//   });
