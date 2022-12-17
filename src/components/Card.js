@@ -1,9 +1,10 @@
 export default class Card {
-  constructor(data, templateSelector, handleElementClick) {
+  constructor(data, templateSelector, handleElementClick, handleDeleteClick) {
     this._name = data.name;
     this._link = data.link;
     this._templateSelector = templateSelector;
     this._handleOpenPopup = handleElementClick;
+    this._handleOpenDeletePopup = handleDeleteClick;
     this._likeCounter = data.likes.length;
     this._id = data._id;
     this._owner = data.owner;
@@ -20,7 +21,6 @@ export default class Card {
   }
 
   _deleteCard = () => {
-
     this._element.remove();
   };
 
@@ -32,14 +32,15 @@ export default class Card {
     this._elementImage.addEventListener("click", () =>
       this._handleOpenPopup({ name: this._name, link: this._link })
     );
-    this._elementDeleteButton
-      .addEventListener("click", this._deleteCard);
+    this._elementDeleteButton.addEventListener("click", () =>
+      this._handleOpenDeletePopup(this)
+    );
     this._element
       .querySelector(".elements__element-heart")
       .addEventListener("click", this._toggleLikeCard);
   }
   _isCardMine(clientId) {
-    return this._owner._id === clientId
+    return this._owner._id === clientId;
   }
 
   generateCard() {
@@ -63,9 +64,11 @@ export default class Card {
     this._elementDeleteButton = this._element.querySelector(
       ".elements__element-delete-button"
     );
-    
-    if (this._isCardMine("2c24b0e4cc7402d0f2609066")){
-      this._elementDeleteButton.classList.remove("elements__element-delete-button_disable");
+
+    if (this._isCardMine("2c24b0e4cc7402d0f2609066")) {
+      this._elementDeleteButton.classList.remove(
+        "elements__element-delete-button_disable"
+      );
     }
 
     this._setEventListeners();

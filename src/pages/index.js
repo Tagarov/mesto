@@ -4,24 +4,23 @@ import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
+import PopupWithButton from "../components/PopupWithButton.js";
 import UserInfo from "../components/UserInfo.js";
 import Api from "../components/Api.js";
 import {
-  //initialCards,
+  initialCards,
   valObj,
   cardListSection,
   token,
   cohortNumber,
 } from "../utils/constants.js";
-//console.log(initialCards[Math.floor(Math.random() * initialCards.length)]);
 const buttonEditProfile = document.querySelector(".profile__edit-button");
 const buttonAddCard = document.querySelector(".profile__add-button");
-//const popupEditProfile = document.querySelector(".popup_form_edit-profile");
 const formProfileEdit = document.forms["editProfileInfoForm"];
-//const popupAddCard = document.querySelector(".popup_form_add-place");
 const formAddElement = document.forms["addNewPlace"];
 const cardPopup = new PopupWithImage(".popup_type_card");
 cardPopup.setEventListeners();
+
 const user = new UserInfo(".profile__person", ".profile__person-description");
 const validatorFormAddCard = new FormValidator(valObj, formAddElement);
 const validatorFormEditProfile = new FormValidator(valObj, formProfileEdit);
@@ -40,12 +39,9 @@ const handleSubmitEditForm = (evt) => {
 const handleSubmitAddForm = (evt) => {
   evt.preventDefault();
   const cardItem = popupFormAddCard.getInputValues();
-  client
-    .addNewCard(cardItem)
-    .then((result) => {
-      cardList.addFirstItem(result);
-    });
-  //cardList.addFirstItem(cardItem);
+  client.addNewCard(cardItem).then((result) => {
+    cardList.addFirstItem(result);
+  });
   popupFormAddCard.close();
 };
 
@@ -65,7 +61,8 @@ const createCard = (cardItem) => {
   const card = new Card(
     cardItem,
     "#element-template",
-    cardPopup.open.bind(cardPopup)
+    cardPopup.open.bind(cardPopup),
+    cardDeletePopup.open.bind(cardDeletePopup)
   );
   return card.generateCard();
 };
@@ -103,6 +100,20 @@ client.getCardsFromServer().then((result) => {
 client.getUserFromServer().then((result) => {
   user.setUserInfo(result);
 });
+
+const handleButtonDeleteClick = (card) => {
+  client.deleteMyCard(card._id).then((result) => {
+    card._deleteCard();
+    cardDeletePopup.close();
+  });
+};
+
+const cardDeletePopup = new PopupWithButton(
+  ".popup_type_delete-card",
+  handleButtonDeleteClick
+);
+cardDeletePopup.setEventListeners();
+
 
 // client
 //   .addNewCard(initialCards[Math.floor(Math.random() * initialCards.length)])
