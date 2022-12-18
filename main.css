@@ -459,6 +459,25 @@ template {
   object-fit: cover;
 }
 
+.profile__edit-avatar-button {
+  border: none;
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  background-color: transparent;
+  background-image: url(8667ac4a523e8fc42e59.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 26px;
+  opacity: 0;
+  transition: opacity 0.3s ease-in;
+  cursor: pointer;
+}
+.profile__edit-avatar-button:hover {
+  opacity: 1;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
 .profile__profile-info {
   position: relative;
   margin: 0 0 0 30px;
@@ -651,6 +670,9 @@ template {
   opacity: 0.6;
 }
 
+.elements__element-delete-button_disable {
+    display: none;
+}
 .elements__title-container {
   width: 100%;
   display: flex;
@@ -672,10 +694,18 @@ template {
   overflow: hidden;
 }
 
+.elements__element-like-container {
+    display: flex;
+    flex-direction: column;
+    margin: 0 0;
+    padding-top: 22px;
+    width: 62px;
+}
+
 .elements__element-heart {
   width: 22px;
   height: 19px;
-  margin: 30px 20px 0 0;
+  margin: 0 auto;
   border: 0;
   transition: opacity 0.3s;
   background-color: #ffffff;
@@ -692,6 +722,21 @@ template {
 
 .elements__element-heart_active {
   background-image: url(e787eeb70bb65b7b453a.svg);
+}
+
+.elements__element-like-counter {
+  margin: 3px auto 0;
+  color: black;
+  text-align: center;
+  font-family: "Inter", Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 1.23;
+  max-width: 80%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .footer {
@@ -753,7 +798,6 @@ template {
   position: relative;
   margin: auto;
   width: 430px;
-  min-height: 330px;
   box-sizing: border-box;
   padding: 0px;
   background-color: #ffffff;
@@ -763,7 +807,6 @@ template {
 @media screen and (max-width: 678px) {
   .popup__container {
     width: 282px;
-    min-height: 322px;
   }
 }
 
