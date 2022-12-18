@@ -6,6 +6,8 @@ export default class PopupWithForm extends Popup {
     this._form = this._popup.querySelector(".popup__form");
     this._handleSubmitForm = handleSubmitForm;
     this._inputList = Array.from(this._form.querySelectorAll(".popup__input"));
+    this._btn = this._popup.querySelector(".popup__button");
+    console.log(this._btn);
   }
   getInputValues() {
     const inputValues = {};
@@ -22,21 +24,17 @@ export default class PopupWithForm extends Popup {
     this._form.reset();
     super.close();
   }
-  // setInputValues(inputValues) {
-  //   for (let key in inputValues) {
-  //     const input = this._form.querySelector(`input[name="${key}"]`);
-  //     if (input) {
-  //       input.value = inputValues[key];
-  //     }
-  //   }
-  // }
   setInputValues(data) {
     this._inputList.forEach((input) => {
       // тут вставляем в `value` инпута данные из объекта
       //по атрибуту `name` этого инпута
-      if (data[input.name]) { // проверка что в переданном объекте есть данные для вставки в инпут
+      if (data[input.name]) {
+        // проверка что в переданном объекте есть данные для вставки в инпут
         input.value = data[input.name];
       }
     });
+  }
+  setButtonMessage(message) {
+    this._btn.textContent = message;
   }
 }

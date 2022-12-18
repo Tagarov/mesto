@@ -9,7 +9,6 @@ export default class PopupWithButton extends Popup {
 
   open(card) {
     this._card = card;
-    console.log(this._card._element);
     super.open();
   }
 
@@ -18,5 +17,8 @@ export default class PopupWithButton extends Popup {
     this._btn.addEventListener("click", () => {
       this._handleButtonClick(this._card)
     });
+  }
+  setButtonMessage(message){
+    this._btn.textContent = message;
   }
 }

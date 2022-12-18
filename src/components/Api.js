@@ -9,7 +9,14 @@ export default class Api {
         headers: {
           authorization: this._token,
         },
-      }).then((res) => res.json());
+      }).then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+
+        // если ошибка, отклоняем промис
+        return Promise.reject(`Ошибка: ${res.status}`);
+      });
     }
   }
   getUserFromServer() {
@@ -18,7 +25,14 @@ export default class Api {
       headers: {
         authorization: this._token,
       },
-    }).then((res) => res.json());
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+
+      // если ошибка, отклоняем промис
+      return Promise.reject(`Ошибка: ${res.status}`);
+    });
   }
   updateProfileInfo(profileInfo) {
     return fetch(this._baseUrl + "/users/me", {
@@ -28,7 +42,14 @@ export default class Api {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(profileInfo),
-    }).then((res) => res.json());
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+
+      // если ошибка, отклоняем промис
+      return Promise.reject(`Ошибка: ${res.status}`);
+    });
   }
   addNewCard(card) {
     return fetch(this._baseUrl + "/cards", {
@@ -38,31 +59,59 @@ export default class Api {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(card),
-    }).then((res) => res.json());
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+
+      // если ошибка, отклоняем промис
+      return Promise.reject(`Ошибка: ${res.status}`);
+    });
   }
   deleteMyCard(cardId) {
     return fetch(this._baseUrl + "/cards/" + cardId, {
-        method: "DELETE",
-        headers: {
-          authorization: this._token,
-        },
-      }).then((res) => res.json());
+      method: "DELETE",
+      headers: {
+        authorization: this._token,
+      },
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+
+      // если ошибка, отклоняем промис
+      return Promise.reject(`Ошибка: ${res.status}`);
+    });
   }
   putLikeCard(cardId) {
     return fetch(this._baseUrl + "/cards/" + cardId + "/likes", {
-        method: "PUT",
-        headers: {
-          authorization: this._token,
-        },
-      }).then((res) => res.json());
+      method: "PUT",
+      headers: {
+        authorization: this._token,
+      },
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+
+      // если ошибка, отклоняем промис
+      return Promise.reject(`Ошибка: ${res.status}`);
+    });
   }
   deleteLikeCard(cardId) {
     return fetch(this._baseUrl + "/cards/" + cardId + "/likes", {
-        method: "DELETE",
-        headers: {
-          authorization: this._token,
-        },
-      }).then((res) => res.json());
+      method: "DELETE",
+      headers: {
+        authorization: this._token,
+      },
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+
+      // если ошибка, отклоняем промис
+      return Promise.reject(`Ошибка: ${res.status}`);
+    });
   }
   editProfileAvatar(avatarLink) {
     return fetch(this._baseUrl + "/users/me/avatar", {
@@ -72,6 +121,13 @@ export default class Api {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(avatarLink),
-    }).then((res) => res.json());
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+
+      // если ошибка, отклоняем промис
+      return Promise.reject(`Ошибка: ${res.status}`);
+    });
   }
 }
