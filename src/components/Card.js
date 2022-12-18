@@ -55,6 +55,9 @@ export default class Card {
     this._toggleLikeCard();
     this._elementLikeCounter.textContent = this._likes.length;
   }
+  getCardId(){
+    return this._id;
+  }
 
   generateCard(userId) {
     //Получаем DOM-элемент карточки

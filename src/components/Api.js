@@ -64,4 +64,14 @@ export default class Api {
         },
       }).then((res) => res.json());
   }
+  editProfileAvatar(avatarLink) {
+    return fetch(this._baseUrl + "/users/me/avatar", {
+      method: "PATCH",
+      headers: {
+        authorization: this._token,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(avatarLink),
+    }).then((res) => res.json());
+  }
 }
