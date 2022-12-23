@@ -1,5 +1,11 @@
 export default class Card {
-  constructor(data, templateSelector, handleElementClick, handleDeleteClick, handleLikeClick) {
+  constructor(
+    data,
+    templateSelector,
+    handleElementClick,
+    handleDeleteClick,
+    handleLikeClick
+  ) {
     this._name = data.name;
     this._link = data.link;
     this._templateSelector = templateSelector;
@@ -33,19 +39,18 @@ export default class Card {
     this._elementImage.addEventListener("click", () =>
       this._handleOpenPopup({ name: this._name, link: this._link })
     );
-    this._elementDeleteButton.addEventListener("click", () =>
-      this._handleOpenDeletePopup(this)
-    );
-    this._elementLike
-      .addEventListener("click", () => {
-        this._handleLikeClick(this);
-      });
+    this._elementDeleteButton.addEventListener("click", () => {
+      this._handleOpenDeletePopup(this);
+    });
+    this._elementLike.addEventListener("click", () => {
+      this._handleLikeClick(this);
+    });
   }
   _isCardMine(userId) {
     return this._owner._id === userId;
   }
   isLikedByMe(userId) {
-    if(this._likes.find(item => item._id === userId)) {
+    if (this._likes.find((item) => item._id === userId)) {
       return true;
     }
     return false;
@@ -55,7 +60,7 @@ export default class Card {
     this._toggleLikeCard();
     this._elementLikeCounter.textContent = this._likes.length;
   }
-  getCardId(){
+  getCardId() {
     return this._id;
   }
 
@@ -72,8 +77,7 @@ export default class Card {
     this._elementImage.setAttribute("src", this._link);
     this._elementImage.setAttribute("alt", `Фото ${this._name}`);
 
-    this._elementLike = this._element
-      .querySelector(".elements__element-heart");
+    this._elementLike = this._element.querySelector(".elements__element-heart");
 
     this._elementLikeCounter = this._element.querySelector(
       ".elements__element-like-counter"
