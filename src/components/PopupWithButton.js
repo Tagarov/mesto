@@ -1,12 +1,15 @@
 import Popup from "./Popup.js";
 
 export default class PopupWithButton extends Popup {
-  constructor(popupSelector, handleButtonClick) {
+  constructor(popupSelector) {
     super(popupSelector);
     this._btn = this._popup.querySelector(".popup__button");
-    this._handleButtonClick = handleButtonClick;
   }
 
+  open(handleButtonClick){
+    this._handleButtonClick = handleButtonClick;
+    super.open();
+  }
   setEventListeners() {
     super.setEventListeners();
     this._btn.addEventListener("click", () => {

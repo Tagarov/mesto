@@ -8,7 +8,7 @@ import PopupWithButton from "../components/PopupWithButton.js";
 import UserInfo from "../components/UserInfo.js";
 import Api from "../components/Api.js";
 import {
-  //initialCards,
+  initialCards,
   valObj,
   cardListSection,
   token,
@@ -35,29 +35,29 @@ const validatorFormEditAvatar = new FormValidator(
   formProfileAvatarEdit
 );
 const client = new Api(token, cohortNumber);
-let currentCardId;
 let userId;
-const handleButtonDeleteClick = () => {
-  cardDeletePopup.setButtonMessage("Удаление...");
-  client
-    .deleteMyCard(currentCardId.getCardId())
-    .then(() => {
-      currentCardId._deleteCard();
-      cardDeletePopup.close();
-    })
-    .catch((err) => {
-      console.log(err); // выведем ошибку в консоль
-    })
-    .finally(() => {
-      cardDeletePopup.setButtonMessage("Да");
-    });
-};
 
-const cardDeletePopup = new PopupWithButton(
-  ".popup_type_delete-card",
-  handleButtonDeleteClick
-);
+function generateHandleButtonDeleteClickFunction (card) {
+  function handleButtonDeleteClick() {
+    cardDeletePopup.setButtonMessage("Удаление...");
+    client
+      .deleteMyCard(card.getCardId())
+      .then(() => {
+        card._deleteCard();
+        cardDeletePopup.close();
+      })
+      .catch((err) => {
+        console.log(err); // выведем ошибку в консоль
+      })
+      .finally(() => {
+        cardDeletePopup.setButtonMessage("Да");
+      });
+  };
+  return handleButtonDeleteClick;
+}
 
+
+const cardDeletePopup = new PopupWithButton(".popup_type_delete-card");
 
 const handleSubmitEditForm = (evt) => {
   evt.preventDefault();
@@ -129,9 +129,9 @@ function openEditAvatarPopup() {
 }
 
 const handleCardDelete = (card) => {
-  currentCardId = card;
-  cardDeletePopup.open.bind(cardDeletePopup)();
-}
+  //cardDeletePopup.setSubmitAction();
+  cardDeletePopup.open.bind(cardDeletePopup)(generateHandleButtonDeleteClickFunction(card));
+};
 
 const createCard = (cardItem) => {
   const card = new Card(
@@ -189,9 +189,6 @@ Promise.all([
     //попадаем сюда если один из промисов завершаться ошибкой
     console.log(err);
   });
-  
-
-
 
 cardDeletePopup.setEventListeners();
 
@@ -217,20 +214,19 @@ const handleCardLikeClick = (card) => {
   }
 };
 
-
-// function addRandomCard () {
-//   const cardItem = initialCards[Math.floor(Math.random()*initialCards.length)];
-//   client
-//     .addNewCard(cardItem)
-//     .then((result) => {
-//       cardList.addFirstItem(result);
-//       popupFormAddCard.close();
-//     })
-//     .catch((err) => {
-//       console.log(err); // выведем ошибку в консоль
-//     })
-//     .finally(() => {
-//       popupFormAddCard.setButtonMessage("Добавить");
-//     });
-// }
-// addRandomCard();
+function addRandomCard () {
+  const cardItem = initialCards[Math.floor(Math.random()*initialCards.length)];
+  client
+    .addNewCard(cardItem)
+    .then((result) => {
+      cardList.addFirstItem(result);
+      popupFormAddCard.close();
+    })
+    .catch((err) => {
+      console.log(err); // выведем ошибку в консоль
+    })
+    .finally(() => {
+      popupFormAddCard.setButtonMessage("Добавить");
+    });
+}
+addRandomCard();
