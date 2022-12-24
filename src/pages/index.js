@@ -8,7 +8,7 @@ import PopupWithButton from "../components/PopupWithButton.js";
 import UserInfo from "../components/UserInfo.js";
 import Api from "../components/Api.js";
 import {
-  initialCards,
+  //initialCards,
   valObj,
   cardListSection,
   token,
@@ -129,7 +129,6 @@ function openEditAvatarPopup() {
 }
 
 const handleCardDelete = (card) => {
-  //cardDeletePopup.setSubmitAction();
   cardDeletePopup.open.bind(cardDeletePopup)(generateHandleButtonDeleteClickFunction(card));
 };
 
@@ -214,19 +213,19 @@ const handleCardLikeClick = (card) => {
   }
 };
 
-function addRandomCard () {
-  const cardItem = initialCards[Math.floor(Math.random()*initialCards.length)];
-  client
-    .addNewCard(cardItem)
-    .then((result) => {
-      cardList.addFirstItem(result);
-      popupFormAddCard.close();
-    })
-    .catch((err) => {
-      console.log(err); // выведем ошибку в консоль
-    })
-    .finally(() => {
-      popupFormAddCard.setButtonMessage("Добавить");
-    });
-}
-addRandomCard();
+// function addRandomCard () {
+//   const cardItem = initialCards[Math.floor(Math.random()*initialCards.length)];
+//   client
+//     .addNewCard(cardItem)
+//     .then((result) => {
+//       cardList.addFirstItem(result);
+//       popupFormAddCard.close();
+//     })
+//     .catch((err) => {
+//       console.log(err); // выведем ошибку в консоль
+//     })
+//     .finally(() => {
+//       popupFormAddCard.setButtonMessage("Добавить");
+//     });
+// }
+// addRandomCard();
